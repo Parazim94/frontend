@@ -18,7 +18,11 @@ export default function Dashboard() {
 
     const fetchNotes = async () => {
       try {
-        const res = await axios.get("/notes");
+        const res = await axios.get("/notes", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         setNotes(res.data);
       } catch (err) {
         console.error(err);
@@ -31,7 +35,16 @@ export default function Dashboard() {
   const addNote = async () => {
     if (!title || !content) return;
     try {
-      const res = await axios.post("/notes", { title, content });
+      const token = localStorage.getItem("token");
+      const res = await axios.post(
+        "/notes",
+        { title, content },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       setNotes([...notes, res.data]);
       setTitle("");
       setContent("");
@@ -42,7 +55,12 @@ export default function Dashboard() {
 
   const deleteNote = async (id: string) => {
     try {
-      await axios.delete(`/notes/${id}`);
+      const token = localStorage.getItem("token");
+      await axios.delete(`/notes/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       setNotes(notes.filter((note) => note._id !== id));
     } catch (err) {
       console.error(err);
@@ -50,8 +68,8 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col items-center py-10">
-      <h1 className="text-4xl font-bold mb-6">📝 Dashboard</h1>
+    <div className="min-h-screen bg-gray-100 flex flex-col items-center py-10 text-black">
+      <h1 className="text-4xl font-bold mb-6 text-black">📝 Dashboard</h1>
       <div className="bg-white p-6 rounded shadow w-96">
         <input
           className="w-full border p-2 mb-2 rounded"
@@ -79,8 +97,8 @@ export default function Dashboard() {
             className="bg-white p-4 mb-2 rounded shadow flex justify-between"
           >
             <div>
-              <h3 className="font-bold">{note.title}</h3>
-              <p>{note.content}</p>
+              <h3 className="font-bold text-black">{note.title}</h3>
+              <p className="text-black">{note.content}</p>
             </div>
             <button
               className="text-red-500"

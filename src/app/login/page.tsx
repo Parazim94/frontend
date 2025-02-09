@@ -23,18 +23,18 @@ export default function Login() {
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center">
       <form className="bg-white p-6 rounded shadow w-80" onSubmit={handleLogin}>
-        <h1 className="text-2xl font-bold mb-4">Login</h1>
+        <h1 className="text-2xl font-bold mb-4 text-black">Login</h1>
         <input
           type="text"
           placeholder="Benutzername"
-          className="w-full border p-2 mb-3 rounded"
+          className="w-full border p-2 mb-3 rounded text-black"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
         <input
           type="password"
           placeholder="Passwort"
-          className="w-full border p-2 mb-3 rounded"
+          className="w-full border p-2 mb-3 rounded text-black"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
@@ -44,7 +44,7 @@ export default function Login() {
         >
           Anmelden
         </button>
-        <p className="text-center mt-4 text-sm">
+        <p className="text-center mt-4 text-sm text-black">
           Noch keinen Account?{" "}
           <a href="/register" className="text-blue-500 underline">
             Hier registrieren
